@@ -1,0 +1,10 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://developer.fastly.com/reference/fastly-toml/
+
+authors = ["z.kohnen@aeroteameindhoven.nl"]
+cloned_from = "https://github.com/fastly/compute-starter-kit-rust-default"
+description = ""
+language = "rust"
+manifest_version = 3
+name = "decap_oauth"
+service_id = "PF6e29Syoo5gXM3xfhEAI2"

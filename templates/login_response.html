@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Response</title>
+    </head>
+    <body>
+        <script>
+            /** @type {function(MessageEvent<string>)} */
+            const receiveMessage = (e) => {
+                if (e.data !== "authorizing:github") return;
+
+                const url = new URL(e.origin);
+
+                switch (url.host) {
+                    case "staging.aeroteameindhoven.nl":
+                    case "aeroteameindhoven.nl":
+                        break;
+                    default:
+                        console.warn(`can not authenticate, I do not trust ${url.host}`);
+                        return;
+                }
+
+                window.removeEventListener("message", receiveMessage, false);
+                window.opener.postMessage(
+                    `authorization:github:success:{"token":"{{token}}","provider":"github"}`,
+                    "*"
+                );
+            }
+            window.addEventListener("message", receiveMessage, false);
+
+            window.opener.postMessage("authorizing:github", "*");
+        </script>
+        <p>Authenticating...</p>
+        <p>If this window does not automatically close, check the developer console or contact Zach</p>
+    </body>
+</html>

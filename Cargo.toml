@@ -1,0 +1,16 @@
+[package]
+edition = "2021"
+name    = "decap-oauth"
+publish = false
+version = "0.1.0"
+
+[profile.release]
+debug = 1
+lto = "thin"
+codegen-units = 1
+
+[dependencies]
+askama = { version = "0.12.1", default-features = false }
+fastly = "0.9.10"
+oauth2 = { version = "4.4.2", default-features = false }
+serde  = { version = "1.0.196", features = ["derive"] }
